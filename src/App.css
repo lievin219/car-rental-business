@@ -19,7 +19,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   font-family: 'Montserrat', sans-serif;
   color: var(--text-dark);
@@ -393,11 +392,33 @@ body {
   cursor: pointer;
 }
 
+.car-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
 .car-image {
-  font-size: 8rem;
-  text-align: center;
-  padding: 3rem;
-  background: linear-gradient(135deg, var(--gray-light) 0%, var(--gray-medium) 100%);
+  width: 100%;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.5s ease;
+  padding: 1rem;
+}
+
+.car-card:hover .car-image img {
+  transform: scale(1.05);
 }
 
 .car-card-content {
@@ -410,15 +431,15 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 2rem 2rem 0;
+  padding: 1.5rem 2rem 0.5rem;
 }
 
 .car-name {
   font-family: 'Playfair Display', serif;
   font-size: 1.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   color: var(--navy-dark);
-  padding: 0 2rem;
+  padding: 0 2rem 1.5rem;
 }
 
 .car-specs {
@@ -475,6 +496,7 @@ body {
 
 .btn-book:hover {
   background: var(--navy-medium);
+  transform: translateX(5px);
 }
 
 /* CTA Section */
@@ -536,7 +558,6 @@ body {
   background: var(--navy-dark);
   color: var(--white);
   padding: 4rem 0 2rem;
-
 }
 
 .footer-content {
@@ -647,7 +668,6 @@ body {
   }
 
   .car-image {
-    font-size: 6rem;
-    padding: 2rem;
+    height: 220px;
   }
 }

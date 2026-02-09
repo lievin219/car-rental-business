@@ -5,6 +5,11 @@ import {
   Star, Calendar, Users, Search, Menu, X 
 } from 'lucide-react';
 import './App.css';
+import lievin from './assets/images/lievin.jpg'
+import lumiere from './assets/images/lumiere.jpg'
+import lucrece from './assets/images/lucrece.jpg'
+import loic from './assets/images/loic.jpg'
+
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +23,7 @@ function App() {
       name: "Mercedes S-Class",
       category: "Luxury Sedan",
       price: "150",
-      image: "🚗",
+      image: lievin,
       seats: 5,
       transmission: "Automatic",
       rating: 4.9
@@ -28,7 +33,7 @@ function App() {
       name: "BMW X7",
       category: "Luxury SUV",
       price: "180",
-      image: "🚙",
+      image: lumiere,
       seats: 7,
       transmission: "Automatic",
       rating: 4.8
@@ -38,7 +43,7 @@ function App() {
       name: "Audi A8",
       category: "Executive Sedan",
       price: "140",
-      image: "🚘",
+      image: lucrece,
       seats: 5,
       transmission: "Automatic",
       rating: 4.9
@@ -48,7 +53,7 @@ function App() {
       name: "Range Rover",
       category: "Premium SUV",
       price: "200",
-      image: "🚐",
+      image: loic,
       seats: 5,
       transmission: "Automatic",
       rating: 5.0
@@ -278,7 +283,9 @@ function App() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
               >
-                <div className="car-image">{car.image}</div>
+                <div className="car-image">
+  <img src={car.image} alt={car.name} />
+</div>
                 <div className="car-category">{car.category}</div>
                 <h3 className="car-name">{car.name}</h3>
                 
