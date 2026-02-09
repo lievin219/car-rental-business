@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { 
   Car, Shield, Clock, MapPin, ChevronRight, 
   Star, Calendar, Users, Search, Menu, X 
 } from 'lucide-react';
 import './App.css';
+import BookingPage from './BookingPage';
 import lievin from './assets/images/lievin.jpg'
 import lumiere from './assets/images/lumiere.jpg'
 import lucrece from './assets/images/lucrece.jpg'
@@ -14,6 +15,7 @@ import loic from './assets/images/loic.jpg'
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
+  const [showBooking, setShowBooking] = useState(false);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
@@ -83,6 +85,16 @@ function App() {
     }
   ];
 
+  const handleBookNow = (car = null) => {
+    setSelectedCar(car);
+    setShowBooking(true);
+  };
+
+  const handleCloseBooking = () => {
+    setShowBooking(false);
+    setSelectedCar(null);
+  };
+
   return (
     <div className="app">
       {/* Navigation */}
@@ -110,6 +122,7 @@ function App() {
               className="btn-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => handleBookNow()}
             >
               Book Now
             </motion.button>
@@ -164,6 +177,7 @@ function App() {
                 className="btn-hero-primary"
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(212, 175, 55, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => document.getElementById('fleet').scrollIntoView({ behavior: 'smooth' })}
               >
                 Explore Fleet <ChevronRight />
               </motion.button>
@@ -209,6 +223,7 @@ function App() {
               className="btn-search"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => handleBookNow()}
             >
               <Search /> Search
             </motion.button>
@@ -284,8 +299,8 @@ function App() {
                 whileHover={{ y: -10 }}
               >
                 <div className="car-image">
-  <img src={car.image} alt={car.name} />
-</div>
+                  <img src={car.image} alt={car.name} />
+                </div>
                 <div className="car-category">{car.category}</div>
                 <h3 className="car-name">{car.name}</h3>
                 
@@ -304,7 +319,7 @@ function App() {
                     className="btn-book"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => setSelectedCar(car)}
+                    onClick={() => handleBookNow(car)}
                   >
                     Book Now
                   </motion.button>
@@ -330,6 +345,7 @@ function App() {
             className="btn-cta"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(212, 175, 55, 0.4)" }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => handleBookNow()}
           >
             Book Your Car Now <ChevronRight />
           </motion.button>
@@ -369,6 +385,17 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Booking Modal */}
+      <AnimatePresence>
+        {showBooking && (
+          <BookingPage 
+            selectedCar={selectedCar}
+            allCars={cars}
+            onClose={handleCloseBooking}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
