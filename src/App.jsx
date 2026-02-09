@@ -2,20 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { 
   Car, Shield, Clock, MapPin, ChevronRight, 
-  Star, Calendar, Users, Search, Menu, X 
+  Star, Calendar, Users, Search, Menu, X, Phone, Mail 
 } from 'lucide-react';
 import './App.css';
 import BookingPage from './BookingPage';
+import FleetPage from './FleetPage';
 import lievin from './assets/images/lievin.jpg'
 import lumiere from './assets/images/lumiere.jpg'
 import lucrece from './assets/images/lucrece.jpg'
 import loic from './assets/images/loic.jpg'
+import rav4 from './assets/images/rav4.jpg'
+import v8 from './assets/images/v8.jpg'
 
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
   const [showBooking, setShowBooking] = useState(false);
+  const [showFleet, setShowFleet] = useState(false);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
@@ -23,32 +27,38 @@ function App() {
     {
       id: 1,
       name: "Mercedes S-Class",
-      category: "Luxury Sedan",
+      category: "Rav4",
       price: "150",
       image: lievin,
       seats: 5,
       transmission: "Automatic",
-      rating: 4.9
+      rating: 4.9,
+      features: ["GPS Navigation", "Leather Seats", "Climate Control", "Premium Sound"],
+      description: "Experience ultimate luxury with the Mercedes S-Class, perfect for business meetings and special occasions in Kigali."
     },
     {
       id: 2,
-      name: "BMW X7",
-      category: "Luxury SUV",
+      name: "v8",
+      category: "V8",
       price: "180",
-      image: lumiere,
+      image: v8,
       seats: 7,
       transmission: "Automatic",
-      rating: 4.8
+      rating: 4.8,
+      features: ["Panoramic Roof", "7 Seats", "All-Wheel Drive", "Premium Audio"],
+      description: "Ideal for family trips and group travel across Rwanda's stunning landscapes."
     },
     {
       id: 3,
-      name: "Audi A8",
-      category: "Executive Sedan",
+      name: "rav4",
+      category: "chinesse cars",
       price: "140",
-      image: lucrece,
+      image: rav4,
       seats: 5,
       transmission: "Automatic",
-      rating: 4.9
+      rating: 4.9,
+      features: ["Massage Seats", "Advanced Safety", "LED Lighting", "Wireless Charging"],
+      description: "The perfect blend of comfort and performance for executive travel in Rwanda."
     },
     {
       id: 4,
@@ -58,7 +68,9 @@ function App() {
       image: loic,
       seats: 5,
       transmission: "Automatic",
-      rating: 5.0
+      rating: 5.0,
+      features: ["Terrain Response", "Air Suspension", "Premium Interior", "360° Camera"],
+      description: "Conquer any terrain in style, from Kigali city to Volcanoes National Park."
     }
   ];
 
@@ -66,33 +78,43 @@ function App() {
     {
       icon: <Shield />,
       title: "Fully Insured",
-      description: "Comprehensive insurance coverage on all vehicles"
+      description: "Comprehensive insurance coverage on all vehicles for your peace of mind"
     },
     {
       icon: <Clock />,
       title: "24/7 Support",
-      description: "Round-the-clock customer service and roadside assistance"
+      description: "Round-the-clock customer service throughout Rwanda"
     },
     {
       icon: <MapPin />,
-      title: "Multiple Locations",
-      description: "Convenient pickup and drop-off across Europe and Asia"
+      title: "Kigali & Beyond",
+      description: "Convenient pickup in Kigali with delivery across Rwanda"
     },
     {
       icon: <Car />,
       title: "Premium Fleet",
-      description: "Latest models from top European and Asian manufacturers"
+      description: "Latest luxury models meticulously maintained to the highest standards"
     }
   ];
 
   const handleBookNow = (car = null) => {
     setSelectedCar(car);
     setShowBooking(true);
+    setShowFleet(false);
   };
 
   const handleCloseBooking = () => {
     setShowBooking(false);
     setSelectedCar(null);
+  };
+
+  const handleViewAllFleet = () => {
+    setShowFleet(true);
+    setShowBooking(false);
+  };
+
+  const handleCloseFleet = () => {
+    setShowFleet(false);
   };
 
   return (
@@ -110,14 +132,14 @@ function App() {
             whileHover={{ scale: 1.05 }}
           >
             <Car className="logo-icon" />
-            <span className="logo-text">EuroAsia</span>
+            <span className="logo-text">EuroAsia Rwanda</span>
           </motion.div>
           
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#home">Home</a>
-            <a href="#fleet">Our Fleet</a>
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
+            <a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a>
+            <a href="#fleet" onClick={() => setIsMenuOpen(false)}>Our Fleet</a>
+            <a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
+            <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
             <motion.button 
               className="btn-primary"
               whileHover={{ scale: 1.05 }}
@@ -155,8 +177,8 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Journey Between
-              <span className="gradient-text"> Continents</span>
+              Luxury Meets
+              <span className="gradient-text"> The Land of a Thousand Hills</span>
             </motion.h1>
             <motion.p 
               className="hero-subtitle"
@@ -164,9 +186,30 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Experience premium car rentals across Europe and Asia
-              <br />with unparalleled service and luxury
+              Rwanda's premier luxury car rental service
+              <br />Experience world-class vehicles in the heart of Africa
             </motion.p>
+            <motion.div 
+              className="hero-stats"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              <div className="stat-item">
+                <div className="stat-number">24/7</div>
+                <div className="stat-label">Available</div>
+              </div>
+              <div className="stat-divider"></div>
+              <div className="stat-item">
+                <div className="stat-number">100+</div>
+                <div className="stat-label">Happy Clients</div>
+              </div>
+              <div className="stat-divider"></div>
+              <div className="stat-item">
+                <div className="stat-number">4.9★</div>
+                <div className="stat-label">Rating</div>
+              </div>
+            </motion.div>
             <motion.div 
               className="hero-buttons"
               initial={{ opacity: 0, y: 30 }}
@@ -177,16 +220,17 @@ function App() {
                 className="btn-hero-primary"
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(212, 175, 55, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => document.getElementById('fleet').scrollIntoView({ behavior: 'smooth' })}
+                onClick={handleViewAllFleet}
               >
-                Explore Fleet <ChevronRight />
+                View All Vehicles <ChevronRight />
               </motion.button>
               <motion.button 
                 className="btn-hero-secondary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
               >
-                Learn More
+                Our Services
               </motion.button>
             </motion.div>
           </motion.div>
@@ -202,7 +246,7 @@ function App() {
               <MapPin className="field-icon" />
               <div>
                 <label>Pick-up Location</label>
-                <input type="text" placeholder="Enter city or airport" />
+                <input type="text" placeholder="Kigali International Airport" />
               </div>
             </div>
             <div className="booking-field">
@@ -225,14 +269,14 @@ function App() {
               whileTap={{ scale: 0.95 }}
               onClick={() => handleBookNow()}
             >
-              <Search /> Search
+              <Search /> Search Available Cars
             </motion.button>
           </motion.div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="features">
+      <section className="features" id="services">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -240,9 +284,9 @@ function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="section-title">Why Choose EuroAsia</h2>
+            <h2 className="section-title">Why Choose EuroAsia Rwanda</h2>
             <p className="section-subtitle">
-              Excellence in every journey, across two continents
+              Experience international luxury standards right here in Kigali
             </p>
           </motion.div>
 
@@ -281,14 +325,14 @@ function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="section-title">Premium Fleet</h2>
+            <h2 className="section-title">Featured Premium Fleet</h2>
             <p className="section-subtitle">
-              Handpicked luxury vehicles for your journey
+              Handpicked luxury vehicles for your Rwandan journey
             </p>
           </motion.div>
 
           <div className="cars-grid">
-            {cars.map((car, index) => (
+            {cars.slice(0, 4).map((car, index) => (
               <motion.div
                 key={car.id}
                 className="car-card"
@@ -300,6 +344,7 @@ function App() {
               >
                 <div className="car-image">
                   <img src={car.image} alt={car.name} />
+                  <div className="car-badge">Popular</div>
                 </div>
                 <div className="car-category">{car.category}</div>
                 <h3 className="car-name">{car.name}</h3>
@@ -327,6 +372,23 @@ function App() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div 
+            className="fleet-cta"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.button 
+              className="btn-view-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleViewAllFleet}
+            >
+              View Complete Fleet <ChevronRight />
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
@@ -339,8 +401,8 @@ function App() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2>Ready to Start Your Journey?</h2>
-          <p>Book your premium vehicle today and experience luxury on the road</p>
+          <h2>Ready to Experience Luxury in Rwanda?</h2>
+          <p>Book your premium vehicle today and explore the beauty of the Land of a Thousand Hills in style</p>
           <motion.button 
             className="btn-cta"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(212, 175, 55, 0.4)" }}
@@ -353,15 +415,15 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
+      <footer className="footer" id="about">
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
               <div className="footer-logo">
                 <Car className="logo-icon" />
-                <span>EuroAsia</span>
+                <span>EuroAsia Rwanda</span>
               </div>
-              <p>Premium car rentals connecting Europe and Asia</p>
+              <p>Premium luxury car rentals in the heart of Kigali, Rwanda. Bringing world-class service to East Africa.</p>
             </div>
             
             <div className="footer-section">
@@ -373,15 +435,17 @@ function App() {
             </div>
             
             <div className="footer-section">
-              <h4>Contact</h4>
-              <p>Email: info@euroasia-rental.com</p>
-              <p>Phone: +250788470902</p>
-              <p>24/7 Support Available</p>
+              <h4>Contact Us</h4>
+              <p><Mail size={16} /> info@euroasia-rwanda.com</p>
+              <p><Phone size={16} /> +250 788 470 902</p>
+              <p><MapPin size={16} /> Kigali, Rwanda</p>
+              <p className="support-badge">🕐 24/7 Support Available</p>
             </div>
           </div>
           
           <div className="footer-bottom">
-            <p>&copy; 2026 EuroAsia Car Rental. All rights reserved.</p>
+            <p>&copy; 2026 EuroAsia Car Rental Rwanda. All rights reserved.</p>
+            <p className="footer-tagline">Luxury Redefined in Rwanda</p>
           </div>
         </div>
       </footer>
@@ -393,6 +457,17 @@ function App() {
             selectedCar={selectedCar}
             allCars={cars}
             onClose={handleCloseBooking}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Fleet Page Modal */}
+      <AnimatePresence>
+        {showFleet && (
+          <FleetPage 
+            cars={cars}
+            onClose={handleCloseFleet}
+            onBookCar={handleBookNow}
           />
         )}
       </AnimatePresence>
