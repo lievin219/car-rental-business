@@ -1,0 +1,653 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --navy-dark: #0a1628;
+  --navy-medium: #1a2942;
+  --navy-light: #2d3e5f;
+  --gold: #d4af37;
+  --gold-light: #f4d03f;
+  --white: #ffffff;
+  --gray-light: #f8f9fa;
+  --gray-medium: #e9ecef;
+  --text-dark: #0a1628;
+  --text-light: #6c757d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  background: var(--white);
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 22, 40, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.logo-icon {
+  color: var(--gold);
+  font-size: 2rem;
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  color: var(--navy-dark);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 50%, var(--navy-light) 100%);
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.hero-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  width: 100%;
+  z-index: 1;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -2px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 600px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.btn-hero-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  color: var(--navy-dark);
+  border: none;
+  padding: 1.25rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.btn-hero-secondary {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  padding: 1.25rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-hero-secondary:hover {
+  background: var(--white);
+  color: var(--navy-dark);
+}
+
+/* Booking Widget */
+.booking-widget {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 1200px;
+}
+
+.booking-field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.field-icon {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.booking-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.booking-field input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  outline: none;
+}
+
+.booking-field input::placeholder {
+  color: var(--text-light);
+}
+
+.btn-search {
+  background: var(--navy-dark);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+  background: var(--navy-medium);
+}
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Titles */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--navy-dark);
+  letter-spacing: -1px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin-bottom: 4rem;
+  font-weight: 300;
+}
+
+/* Features Section */
+.features {
+  padding: 8rem 0;
+  background: var(--gray-light);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: var(--white);
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+
+.feature-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.feature-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--navy-dark);
+}
+
+.feature-card p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Fleet Section */
+.fleet {
+  padding: 8rem 0;
+  background: var(--white);
+}
+
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.car-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.car-image {
+  font-size: 8rem;
+  text-align: center;
+  padding: 3rem;
+  background: linear-gradient(135deg, var(--gray-light) 0%, var(--gray-medium) 100%);
+}
+
+.car-card-content {
+  padding: 2rem;
+}
+
+.car-category {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2rem 2rem 0;
+}
+
+.car-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--navy-dark);
+  padding: 0 2rem;
+}
+
+.car-specs {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--gray-medium);
+  border-bottom: 1px solid var(--gray-medium);
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.car-specs span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.car-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+
+.car-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.price-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy-dark);
+}
+
+.price-period {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.btn-book {
+  background: var(--navy-dark);
+  color: var(--white);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-book:hover {
+  background: var(--navy-medium);
+}
+
+/* CTA Section */
+.cta {
+  padding: 8rem 0;
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+}
+
+.cta-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cta h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.cta p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.btn-cta {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  color: var(--navy-dark);
+  border: none;
+  padding: 1.25rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+/* Footer */
+.footer {
+  background: var(--navy-dark);
+  color: var(--white);
+  padding: 4rem 0 2rem;
+
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.footer-section h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--gold);
+}
+
+.footer-section a,
+.footer-section p {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+  line-height: 1.6;
+}
+
+.footer-section a:hover {
+  color: var(--gold);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: var(--navy-dark);
+    flex-direction: column;
+    padding: 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .booking-widget {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .cta h2 {
+    font-size: 2rem;
+  }
+
+  .car-image {
+    font-size: 6rem;
+    padding: 2rem;
+  }
+}
