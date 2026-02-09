@@ -359,7 +359,7 @@ function App() {
             <div className="footer-section">
               <h4>Contact</h4>
               <p>Email: info@euroasia-rental.com</p>
-              <p>Phone: +1 (555) 123-4567</p>
+              <p>Phone: +250788470902</p>
               <p>24/7 Support Available</p>
             </div>
           </div>
