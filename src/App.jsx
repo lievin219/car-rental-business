@@ -132,7 +132,7 @@ function App() {
             whileHover={{ scale: 1.05 }}
           >
             <Car className="logo-icon" />
-            <span className="logo-text">EuroAsia Rwanda</span>
+            <span className="logo-text">EurAsia Rwanda</span>
           </motion.div>
           
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
