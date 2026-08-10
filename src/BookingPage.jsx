@@ -3,38 +3,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Car, Calendar, MapPin, User, Mail, Phone, CreditCard, 
   CheckCircle, ChevronLeft, ChevronRight, Clock, Shield,
-  AlertCircle, X
+  AlertCircle, X, UploadCloud, ShieldCheck, Sparkles
 } from 'lucide-react';
 import './BookingPage.css';
 
 function BookingPage({ selectedCar, onClose, allCars }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [bookingData, setBookingData] = useState({
-    // Step 1: Car Selection
     carId: selectedCar?.id || null,
-    
-    // Step 2: Date & Location
     pickupLocation: '',
     dropoffLocation: '',
     pickupDate: '',
     pickupTime: '',
     dropoffDate: '',
     dropoffTime: '',
-    
-    // Step 3: Personal Details
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    driversLicense: '',
-    
-    // Step 4: Extras
+    licenseDocument: null,
     insurance: 'basic',
     gps: false,
     childSeat: false,
     additionalDriver: false,
-    
-    // Step 5: Payment
     cardNumber: '',
     cardName: '',
     expiryDate: '',
@@ -45,7 +36,7 @@ function BookingPage({ selectedCar, onClose, allCars }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [rentalDays, setRentalDays] = useState(0);
 
-  // Calculate rental days and total price
+  
   useEffect(() => {
     if (bookingData.pickupDate && bookingData.dropoffDate) {
       const pickup = new Date(bookingData.pickupDate);
@@ -58,7 +49,7 @@ function BookingPage({ selectedCar, onClose, allCars }) {
         const car = allCars.find(c => c.id === bookingData.carId) || selectedCar;
         let total = car ? parseFloat(car.price) * days : 0;
         
-        // Add extras
+      
         if (bookingData.insurance === 'premium') total += 25 * days;
         if (bookingData.insurance === 'full') total += 45 * days;
         if (bookingData.gps) total += 10 * days;
@@ -101,7 +92,7 @@ function BookingPage({ selectedCar, onClose, allCars }) {
         if (!bookingData.dropoffDate) newErrors.dropoffDate = 'Dropoff date is required';
         if (!bookingData.dropoffTime) newErrors.dropoffTime = 'Dropoff time is required';
         
-        // Validate dates
+        // Validating the  dates
         if (bookingData.pickupDate && bookingData.dropoffDate) {
           const pickup = new Date(bookingData.pickupDate);
           const dropoff = new Date(bookingData.dropoffDate);
@@ -117,7 +108,7 @@ function BookingPage({ selectedCar, onClose, allCars }) {
         if (!bookingData.email) newErrors.email = 'Email is required';
         else if (!/\S+@\S+\.\S+/.test(bookingData.email)) newErrors.email = 'Email is invalid';
         if (!bookingData.phone) newErrors.phone = 'Phone number is required';
-        if (!bookingData.driversLicense) newErrors.driversLicense = 'Driver\'s license is required';
+        if (!bookingData.licenseDocument) newErrors.licenseDocument = 'Please upload your driver\'s license';
         break;
         
       case 5:
@@ -155,6 +146,21 @@ function BookingPage({ selectedCar, onClose, allCars }) {
       // Here you would normally send data to backend
       console.log('Booking submitted:', bookingData);
     }
+  };
+
+  const handleLicenseUpload = (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1);
+    handleInputChange('licenseDocument', {
+      name: file.name,
+      type: file.type,
+      size: `${fileSizeMB} MB`
+    });
   };
 
   const formatCardNumber = (value) => {
@@ -364,7 +370,22 @@ function BookingPage({ selectedCar, onClose, allCars }) {
                 className="booking-step"
               >
                 <h2>Your Information</h2>
-                <p className="step-subtitle">Please provide your contact details</p>
+                <p className="step-subtitle">Please provide your contact details and upload your driving license</p>
+
+                <div className="benefit-strip">
+                  <div className="benefit-item">
+                    <ShieldCheck size={16} />
+                    <span>Secure verification</span>
+                  </div>
+                  <div className="benefit-item">
+                    <Sparkles size={16} />
+                    <span>Fast approval</span>
+                  </div>
+                  <div className="benefit-item">
+                    <CheckCircle size={16} />
+                    <span>Zero hidden fees</span>
+                  </div>
+                </div>
                 
                 <div className="form-grid">
                   <div className="form-group">
@@ -416,15 +437,38 @@ function BookingPage({ selectedCar, onClose, allCars }) {
                   </div>
 
                   <div className="form-group full-width">
-                    <label>Driver's License Number</label>
-                    <input
-                      type="text"
-                      value={bookingData.driversLicense}
-                      onChange={(e) => handleInputChange('driversLicense', e.target.value)}
-                      placeholder="DL123456789"
-                      className={errors.driversLicense ? 'error' : ''}
-                    />
-                    {errors.driversLicense && <span className="error-message">{errors.driversLicense}</span>}
+                    <label><UploadCloud size={18} /> Driver's License</label>
+                    <div className={`upload-box ${errors.licenseDocument ? 'error' : ''}`}>
+                      <input
+                        type="file"
+                        id="license-upload"
+                        accept="image/*,.pdf"
+                        onChange={handleLicenseUpload}
+                      />
+                      <label htmlFor="license-upload" className="upload-label">
+                        <div className="upload-icon">
+                          <UploadCloud size={24} />
+                        </div>
+                        <div className="upload-text">
+                          <strong>Upload your driver's license</strong>
+                          <span>PNG, JPG, or PDF • Clear image recommended</span>
+                        </div>
+                      </label>
+
+                      {bookingData.licenseDocument && (
+                        <div className="uploaded-file">
+                          <span className="file-name">{bookingData.licenseDocument.name}</span>
+                          <button
+                            type="button"
+                            className="clear-upload"
+                            onClick={() => handleInputChange('licenseDocument', null)}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                    {errors.licenseDocument && <span className="error-message">{errors.licenseDocument}</span>}
                   </div>
                 </div>
               </motion.div>
@@ -696,6 +740,12 @@ function BookingPage({ selectedCar, onClose, allCars }) {
             )}
 
             <div className="summary-details">
+              <div className="summary-perks">
+                <span>Free cancellation</span>
+                <span>24/7 support</span>
+                <span>Secure check-in</span>
+              </div>
+
               {rentalDays > 0 && (
                 <>
                   <div className="summary-item">

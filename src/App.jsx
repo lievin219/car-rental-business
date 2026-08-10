@@ -152,7 +152,7 @@ function App() {
 
           <button 
             className="menu-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen(isMenuOpen)}
           >
             {isMenuOpen ? <X /> : <Menu />}
           </button>
@@ -421,7 +421,7 @@ function App() {
             <div className="footer-section">
               <div className="footer-logo">
                 <Car className="logo-icon" />
-                <span>EuroAsia Rwanda</span>
+                <span>EurAsia Rwanda</span>
               </div>
               <p>Premium luxury car rentals in the heart of Kigali, Rwanda. Bringing world-class service to East Africa.</p>
             </div>
@@ -436,7 +436,7 @@ function App() {
             
             <div className="footer-section">
               <h4>Contact Us</h4>
-              <p><Mail size={16} /> info@euroasia-rwanda.com</p>
+              <p><Mail size={16} /> info@eurasia-rwanda.com</p>
               <p><Phone size={16} /> +250 788 470 902</p>
               <p><MapPin size={16} /> Kigali, Rwanda</p>
               <p className="support-badge">🕐 24/7 Support Available</p>
