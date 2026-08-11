@@ -5,9 +5,9 @@ import {
   Globe, Smartphone, CreditCard, Building2, CheckCircle, Info, Copy, MessageCircle,
   Car, BedDouble, Sparkles, Minus, Plus,
 } from 'lucide-react';
-import { TOUR_EXTRAS, ACCOMMODATION_TIERS, RESIDENCY } from './data/tours';
-import { guides, LANGUAGE_FILTERS } from './data/guides';
-import { formatPrice } from './utils/currency';
+import { TOUR_EXTRAS, ACCOMMODATION_TIERS, RESIDENCY } from './tours.js';
+import { guides, LANGUAGE_FILTERS } from './guides.js';
+import { formatPrice } from './currency.js';
 import { GuideCard } from './TourPage';
 import './TourBookingPage.css';
 

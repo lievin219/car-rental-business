@@ -483,14 +483,14 @@ import {
   Star, Calendar, Users, Search, Menu, X, Phone, Mail, Compass,
 } from 'lucide-react';
 import './App.css';
-import './TourSection.css';
+import './TourPage.css';
 import BookingPage from './BookingPage';
 import FleetPage from './FleetPage';
 import TourPage, { TourCover } from './TourPage';
 import TourBookingPage from './TourBookingPage';
 import FloatingContact from './FloatingContact';
-import { tours } from './data/tours';
-import { formatPrice } from './utils/currency';
+import { tours } from './tours.js';
+import { formatPrice } from './currency.js';
 import lievin from './assets/images/lievin.jpg';
 import loic from './assets/images/loic.jpg';
 import rav4 from './assets/images/rav4.jpg';

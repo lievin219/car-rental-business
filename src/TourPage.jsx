@@ -5,9 +5,9 @@ import {
   Waves, Building2, Footprints, Coffee, Languages, Award, MapPin,
   Info, Check, Ticket, CalendarDays, ShieldCheck,
 } from 'lucide-react';
-import { tours, TOUR_CATEGORIES, DIFFICULTIES } from './data/tours';
-import { guides } from './data/guides';
-import { formatPrice } from './utils/currency';
+import { tours, TOUR_CATEGORIES, DIFFICULTIES } from './tours.js';
+import { guides } from './guides.js';
+import { formatPrice } from './currency.js';
 import './TourPage.css';
 
 const ICONS = {
